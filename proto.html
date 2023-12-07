@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <title>THIGA AI - Prompt Generator</title>
+</head>
+<body>
+    <div class="container">
+        <div class="text-center">
+            <img src="./img/logo.png" alt="Logo THIGA AI" id="thiga_logo" class="mt-5 mb-5" />
+            <h1 class="text-uppercase text-light mb-5">Prompt Generator</h1>
+
+                <!-- STEP 1 -->
+                <div class="row form-step">
+                    <div class="col-1 p-0 text-center"><img src="./img/icon-bot.png" alt=""></div>
+                    <input id="proto-step-1" class="col-11 inputField" type="text" placeholder="Le type de produit" l="Le type de produit">
+                </div>
+
+                <!-- STEP 2 -->
+                <div class="row form-step">
+                    <div class="col-1 p-0 text-center"><img src="./img/icon-bot.png" alt=""></div>
+
+                    <select class="col-11 inputField" id="domain" name="domain" l="Le domaine">
+                        <option value="confidentialityPreferences">Préférences de Confidentialité</option>
+                        <option value="platformPerformanceTracking">Suivi des Performances de la Plateforme</option>
+                        <option value="productReturnsManagement">Gestion des Retours Produits</option>
+                        <option value="socialSharingPreferences">Préférences de Partage Social</option>
+                        <option value="supportRequestsTracking">Suivi des Demandes de Support</option>
+                        <option value="languagePreferences">Préférences de Langue</option>
+                        <option value="newsletterSubscriptionsManagement">Gestion des Abonnements aux Newsletters</option>
+                        <option value="interfaceCustomizationPreferences">Préférences de Personnalisation de l'Interface</option>
+                        <option value="blogPostsAndInteractionsTracking">Suivi des Publications et des Interactions sur le Blog</option>
+                        <option value="pushNotificationPreferences">Préférences de Notification Push</option>
+                        <option value="savingsGoalsTracking">Suivi des Objectifs d'Économies</option>
+                        <option value="streamingPreferencesManagement">Gestion des Préférences de Streaming</option>
+                        <option value="securityAlertsConfiguration">Configuration des Alertes de Sécurité</option>
+                        <option value="marketTrendsTracking">Suivi des Tendances du Marché</option>
+                        <option value="healthAndWellnessPreferences">Préférences de Santé et Bien-être</option>
+                        <option value="travelReservationsManagement">Gestion des Réservations de Voyages</option>
+                    </select>
+                </div>
+
+                <!-- STEP 3 -->
+                <div class="row form-step">
+                    <div class="col-1 text-center">Le device :</div>
+                    <div class="col-10">
+                        <div class="form-check form-check-inline inlineRadio">
+                            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="web app" class="inputField" l="Le device">
+                            <label for="inlineRadio1">🖥️ Web app</label>
+                        </div>
+                        <div class="form-check form-check-inline inlineRadio">
+                            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="mobile app" class="inputField" l="Le device">
+                            <label for="inlineRadio2">📱 Mobile app</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 4 -->
+                <div class="row form-step">
+                    <label class="col-1" for="language">Langue:</label>
+                    <select class="col-11 inputField" id="language" name="language" l="La langue">
+                        <option value="english">🇬🇧 Anglais</option>
+                        <option value="french">🇫🇷 Français</option>
+                        <option value="spanish">🇪🇸 Espagnol</option>
+                    </select>
+                </div>
+
+                <!-- STEP 5 -->
+                <div class="row form-step">
+                    <label class="col-1" for="codeLanguage">Langage de Code:</label>
+                    <select class="col-11 inputField" id="codeLanguage" name="codeLanguage" l="Le language de programmation">
+                        <option value="python">Python</option>
+                        <option value="javascript">JavaScript</option>
+                        <option value="java">Java</option>
+                        <option value="cpp">C++</option>
+                    </select>
+                </div>
+
+                <!-- STEP 6 -->
+                <div class="row form-step">
+                    <div class="col-1 text-center"><img src="./img/icon-bot.png" alt=""></div>
+                    <input id="proto-step-6" class="col-11 inputField" type="text" placeholder="Le contexte" l="Le contexte">
+                </div>
+
+                <!-- STEP 7 -->
+                <div class="row form-step">
+                    <div class="col-1 text-center"><img src="./img/icon-bot.png" alt=""></div>
+                    <input id="proto-step-7" class="col-11 inputField" type="text" placeholder="Objectif du prompt" l="L'objectif du prompt">
+                </div>
+
+                <!-- STEP 8 -->
+                <div class="row form-step">
+                    <div class="col-1 text-center"><img src="./img/icon-bot.png" alt=""></div>
+                    <input id="proto-step-8" class="col-11 inputField" type="text" placeholder="Mots-clés importants" l="Les mots-clés importants">
+                </div>
+
+
+                <!-- RESULT -->
+                <div class="form-step">
+                    <div class=" text-center"><img src="./img/icon-bot.png" alt=""> Voici ton prompt prêt à être utilisé sur ChatGPT !</div>
+                    <textarea name="" id="previewPrompt" cols="30" rows="10" class="col-11"></textarea>
+                </div>
+
+    <button type="button" onclick="generatePrompt()">Générer Prompt</button>
+
+                <a href="index.html">Retour à l'accueil</a>
+        </div>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="./proto.js"></script>
+</body>
+</html>

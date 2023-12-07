@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application de Génération de Prompts</title>
+
+    <style>
+        /* Réinitialisation des styles par défaut */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Styles pour le corps (body) */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ecf0f1;
+            display: flex; /* Utiliser Flexbox pour la mise en page */
+        }
+
+        /* Styles pour le menu latéral */
+        .menu {
+            width: 250px;
+            background-color: #34495e;
+            border-right: 1px solid #bdc3c7;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+        .menu ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu li a {
+            text-decoration: none;
+            color: white;
+            margin-bottom: 10px;
+            display: block;
+            width: 100%;
+            padding: 10px 0;
+            transition: background-color 0.3s;
+        }
+
+        .menu li a:hover,
+        .menu li a:focus {
+            background-color: #1abc9c;
+        }
+
+        /* Styles pour le contenu principal */
+        .contenu {
+            flex: 1; /* Utiliser tout l'espace disponible restant */
+            padding: 40px;
+            background-color: #ecf0f1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: auto; /* Activer le défilement vertical en cas de besoin */
+        }
+
+        h1 {
+            color: #34495e;
+        }
+
+        /* Styles pour les cartes de raccourci */
+        .cartesRaccourci {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .carte {
+            width: calc(50% - 10px); /* Pour deux colonnes avec un espacement de 20px */
+            padding: 20px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ff6b81, #6b63ff, #81ff6b, #ffef63);
+            background-size: 600% 600%;
+            animation: gradientAnimation 6s ease infinite;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .carte:hover {
+            transform: scale(1.02);
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+
+        /* Styles pour le formulaire */
+        form {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        form button {
+            background-color: #1abc9c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Styles pour l'affichage du prompt généré */
+        #affichagePrompt {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            max-width: 600px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="menuVertical" class="menu">
+        <ul>
+            <li><a href="#" class="menu-item" data-content-id="generateSpec">Générateur de spécifications</a></li>
+            <li><a href="#" class="menu-item" data-content-id="generatePrototype">Générateur de prototype</a></li>
+            <li><a href="#" class="menu-item" data-content-id="generatePersona">Générateur de Persona</a></li>
+            <li><a href="#" class="menu-item" data-content-id="generateRoadmap">Générateur de Roadmap</a></li>
+            <li><a href="#" class="menu-item" data-content-id="generateValueProposition">Générateur de value proposition</a></li>
+        </ul>
+    </div>
+
+    <div id="contenuPrincipal" class="contenu">
+        <h1>Bienvenue dans l'Application de Génération de Prompts</h1>
+        
+        <!-- Cartes de raccourci pour les onglets vignettes -->
+        <div class="cartesRaccourci">
+            <div class="carte" id="generateSpecCard" data-content-id="generateSpec">
+                <h2>Générateur de spécifications</h2>
+                <p>Utilisez cet outil pour générer des spécifications.</p>
+            </div>
+            <div class="carte" id="generatePrototypeCard" data-content-id="generatePrototype">
+                <h2>Générateur de prototype</h2>
+                <p>Ask for a demo</p>
+            </div>
+    
+            <div class="carte" id="generatePersonaCard" data-content-id="generatePersona">
+                <h2>Générateur de persona</h2>
+                <p>Coming Soon</p>
+            </div>
+            <div class="carte" id="generateRoadmapCard" data-content-id="generateRoadmap">
+                <h2>Générateur de Roadmap</h2>
+                <p>Coming Soon</p>
+            </div>
+            <div class="carte" id="generateValuepropositionCard" data-content-id="generateValueproposition">
+                <h2>Générateur de value Proposition</h2>
+                <p>Coming Soon !</p>
+            </div>
+        </div>
+        
+        <!-- Composants du générateur de spécifications (initialement cachés) -->
+        <div id="generateSpecContent" style="display: none;">
+            <form id="monFormulaire" onsubmit="handleFormSubmit(event)">
+                <input type="text" name="marcheDomaineCible" placeholder="Marché/Domaine Cible">
+                <input type="text" name="produitExemple" placeholder="Domaine ou Exemple de Produit">
+                <input type="text" name="acteurMajeur" placeholder="Nom d'un Acteur Majeur sur le Marché Cible">
+                <input type="text" name="motsCles" placeholder="Mots Clés Cible">
+                <input type="text" name="typologieProduit" placeholder="Filtrer les Réponses sur les Typologies de Produit Suivantes">
+                
+                <!-- Ajoutez ici d'autres champs de formulaire nécessaires pour les domaines et fonctions -->
+                <!-- Champs pour le premier domaine -->
+                <input type="text" name="domaine1" placeholder="Nom du Domaine Identifié N°1">
+                <input type="text" name="besoinUtilisateur1" placeholder="Répond au besoin utilisateur de (N°1)">
+                <input type="text" name="objectifUtilisateur1" placeholder="Atteint l'objectif utilisateur de (N°1)">
+                
+                <!-- Champs pour le deuxième domaine -->
+                <input type="text" name="domaine2" placeholder="Nom du Domaine Identifié N°2">
+                <input type="text" name="besoinUtilisateur2" placeholder="Répond au besoin utilisateur de (N°2)">
+                <input type="text" name="objectifUtilisateur2" placeholder="Atteint l'objectif utilisateur de (N°2)">
+                
+                <!-- Champs pour le troisième domaine -->
+                <input type="text" name="domaine3" placeholder="Nom du Domaine Identifié N°3">
+                <input type="text" name="besoinUtilisateur3" placeholder="Répond au besoin utilisateur de (N°3)">
+                <input type="text" name="objectifUtilisateur3" placeholder="Atteint l'objectif utilisateur de (N°3)">
+                <!-- Champs pour les domaines recommandés -->
+                <input type="text" name="domaineRecommande1" placeholder="Nom du Domaine Recommandé Futur Identifié N°1" disabled>
+                <input type="text" name="besoinUtilisateurRecommande1" placeholder="Répond au besoin utilisateur de (Recommandé N°1)" disabled>
+                <input type="text" name="problematiqueRecommande1" placeholder="Problématique de (Recommandé N°1)" disabled>
+                <input type="text" name="fonctionRecommande11" placeholder="Fonction (A) du Domaine Recommandé Futur Identifié N°1" disabled>
+                <input type="text" name="chargeDeveloppementRecommande11" placeholder="Evaluation de la charge de développement (A)" disabled>
+                <input type="text" name="fonctionRecommande12" placeholder="Fonction (B) du Domaine Recommandé Futur Identifié N°1" disabled>
+                <input type="text" name="chargeDeveloppementRecommande12" placeholder="Evaluation de la charge de développement (B)" disabled>
+                <input type="text" name="fonctionRecommande13" placeholder="Fonction (C) du Domaine Recommandé Futur Identifié N°1" disabled>
+                <input type="text" name="chargeDeveloppementRecommande13" placeholder="Evaluation de la charge de développement (C)" disabled>
+                
+                <!-- Champs pour le deuxième domaine recommandé -->
+                <input type="text" name="domaineRecommande2" placeholder="Nom du Domaine Recommandé Futur Identifié N°2" disabled>
+                <input type="text" name="besoinUtilisateurRecommande2" placeholder="Répond au besoin utilisateur de (Recommandé N°2)" disabled>
+                <input type="text" name="problematiqueRecommande2" placeholder="Problématique de (Recommandé N°2)" disabled>
+                <input type="text" name="fonctionRecommande21" placeholder="Fonction (A) du Domaine Recommandé Futur Identifié N°2" disabled>
+                <input type="text" name="chargeDeveloppementRecommande21" placeholder="Evaluation de la charge de développement (A)" disabled>
+                <input type="text" name="fonctionRecommande22" placeholder="Fonction (B) du Domaine Recommandé Futur Identifié N°2" disabled>
+                <input type="text" name="chargeDeveloppementRecommande22" placeholder="Evaluation de la charge de développement (B)" disabled>
+                <input type="text" name="fonctionRecommande23" placeholder="Fonction (C) du Domaine Recommandé Futur Identifié N°2" disabled>
+                <input type="text" name="chargeDeveloppementRecommande23" placeholder="Evaluation de la charge de développement (C)" disabled>
+                
+                <button id="btnGenererPrompt" type="submit">Générer le Prompt</button>
+            </form>
+            <div id="affichagePrompt"></div>
+        </div>
+        
+        <!-- ... Autres composants pour d'autres onglets ... -->
+    </div>
+
+    <script>
+        // JavaScript pour gérer l'affichage des composants en fonction du clic sur le menu ou les cartes de raccourci
+        document.addEventListener('DOMContentLoaded', () => {
+            // Fonction pour afficher le contenu en fonction de l'ID du contenu
+            function afficherContenu(contentId) {
+                // Cacher tous les composants de contenu
+                document.querySelectorAll('.contenu > div').forEach(content => {
+                    content.style.display = 'none';
+                });
+
+                // Afficher le composant correspondant
+                document.getElementById(contentId + 'Content').style.display = 'block';
+            }
+
+            // Rendre les cartes de raccourci cliquables
+            document.getElementById('generateSpecCard').addEventListener('click', () => {
+                afficherContenu('generateSpec');
+            });
+
+            document.getElementById('generatePrototypeCard').addEventListener('click', () => {
+                afficherContenu('generatePrototype');
+            });
+
+            // Gérer également le clic sur les éléments du menu vertical
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const contentId = item.getAttribute('data-content-id');
+                    afficherContenu(contentId);
+                });
+            });
+        });
+
+        // Fonction pour gérer la soumission du formulaire
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const promptData = {};
+            for (let [key, value] of formData.entries()) {
+                promptData[key] = value;
+            }
+            const generatedPrompt = generatePromptBasedOnData(promptData);
+            displayGeneratedPrompt(generatedPrompt);
+        }
+
+        // Fonction pour générer le prompt en fonction des données du formulaire
+        function generatePromptBasedOnData(data) {
+            // Initialiser une chaîne de caractères vide pour le prompt
+            let prompt = "";
+
+            // Ajouter les données du formulaire au prompt
+            prompt += `Marché/Domaine Cible : ${data["marcheDomaineCible"]}\n`;
+            prompt += `Domaine ou Exemple de Produit : ${data["produitExemple"]}\n`;
+            prompt += `Nom d'un Acteur Majeur sur le Marché Cible : ${data["acteurMajeur"]}\n`;
+            prompt += `Mots Clés Cible : ${data["motsCles"]}\n`;
+            prompt += `Filtrer les Réponses sur les Typologies de Produit Suivantes : ${data["typologieProduit"]}\n`;
+
+                            // Ajouter les données pour les domaines identifiés
+                            for (let i = 1; i <= 3; i++) {
+                    const domaine = data[`domaine${i}`];
+                    const besoinUtilisateur = data[`besoinUtilisateur${i}`];
+                    const objectifUtilisateur = data[`objectifUtilisateur${i}`];
+
+                    if (domaine && besoinUtilisateur && objectifUtilisateur) {
+                        prompt += `Domaine Identifié N°${i} : ${domaine}\n`;
+                        prompt += `Répond au besoin utilisateur de (N°${i}) : ${besoinUtilisateur}\n`;
+                        prompt += `Atteint l'objectif utilisateur de (N°${i}) : ${objectifUtilisateur}\n`;
+                    }
+                }
+
+                // Ajouter les données pour les domaines recommandés
+                for (let i = 1; i <= 2; i++) {
+                    const domaineRecommande = data[`domaineRecommande${i}`];
+                    const besoinUtilisateurRecommande = data[`besoinUtilisateurRecommande${i}`];
+                    const problematiqueRecommande = data[`problematiqueRecommande${i}`];
+
+                    if (domaineRecommande && besoinUtilisateurRecommande && problematiqueRecommande) {
+                        prompt += `Domaine Recommandé Futur Identifié N°${i} : ${domaineRecommande}\n`;
+                        prompt += `Répond au besoin utilisateur de (Recommandé N°${i}) : ${besoinUtilisateurRecommande}\n`;
+                        prompt += `Problématique de (Recommandé N°${i}) : ${problematiqueRecommande}\n`;
+
+                        // Ajouter les données pour les fonctions recommandées
+                        for (let j = 1; j <= 3; j++) {
+                            const fonctionRecommande = data[`fonctionRecommande${i}${j}`];
+                            const chargeDeveloppementRecommande = data[`chargeDeveloppementRecommande${i}${j}`];
+
+                            if (fonctionRecommande && chargeDeveloppementRecommande) {
+                                prompt += `Fonction (A) du Domaine Recommandé Futur Identifié N°${i} : ${fonctionRecommande}\n`;
+                                prompt += `Evaluation de la charge de développement (A) : ${chargeDeveloppementRecommande}\n`;
+                            }
+                        }
+                    }
+                }
+
+                return prompt;
+            }
+
+            // Fonction pour afficher le prompt généré
+            function displayGeneratedPrompt(prompt) {
+                const affichagePrompt = document.getElementById('affichagePrompt');
+                affichagePrompt.textContent = prompt;
+            }
+        </script>
+    </body>
+</html>
