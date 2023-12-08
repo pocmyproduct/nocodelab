@@ -15,8 +15,54 @@ const prompts = {
     marketTrendsTracking: "Suivi des tendances du marché : Mettez en place un système de suivi des tendances du marché pour aider les utilisateurs à rester informés des évolutions pertinentes de leur secteur. Incluez des graphiques, des analyses de marché et des notifications personnalisées. Offrez une expérience centrée sur l'information, permettant aux utilisateurs de prendre des décisions éclairées.",
     healthAndWellnessPreferences: "Préférences de santé et bien-être : Créez une page dédiée à la gestion des préférences de santé et de bien-être. Incluez des options pour définir des objectifs de fitness, des rappels d'activité physique et des préférences nutritionnelles. Offrez une expérience holistique axée sur le bien-être des utilisateurs.",
     travelReservationsManagement: "Gestion des réservations de voyages : Développez un système complet pour gérer les réservations de voyages, du choix des destinations à la confirmation des itinéraires. Intégrez des fonctionnalités telles que la recherche de vols, la réservation d'hébergements, et la visualisation des détails du voyage. Assurez-vous que l'interface est conviviale et offre une expérience de réservation transparente, facilitant ainsi la planification des voyages pour les utilisateurs."
-  };
-  function generatePrompt() {
+};
+  
+
+// ###############################################
+// ################ Move from steps ⏩
+// ###############################################
+var steps=0
+$('.inputField').on( "keypress change", function(event) {
+    if (event.key == "Enter") {
+        nextStep();
+    }
+});
+
+function nextStep(){
+    // display none every inputs
+    $('.inputField').addClass("d-none");
+    steps++;
+
+    // Change the label between each steps
+    var label = $('.inputField')[steps].getAttribute('l');
+    $('#steps-label').text(label);
+
+    // => if it's not the last input with the class "inputField"
+    if(steps < $('.inputField').length-1){
+        // display the next step
+        $('.inputField')[steps].classList.remove('d-none');
+        progressbargreen();
+    } else {
+        // display the perfect prompt
+        $('#previewPrompt').removeClass('d-none');
+        generatePrompt();
+        $('.progress-stacked').addClass('d-none');
+    }
+}
+
+// ###############################################
+// ################ Steps bar
+// ###############################################
+
+function progressbargreen(){
+    $('.progress-stacked')[steps].querySelector('.progress-bar').classList.add("progress-checked");
+}
+
+
+// ###############################################
+// ################ Generate the perfect prompt ✨
+// ###############################################
+function generatePrompt() {
     const values = {};
     document.querySelectorAll('.inputField').forEach(input => {
       values[input.id] = input.type === 'radio' ? document.querySelector(`input[name="${input.name}"]:checked`).value : input.value;
@@ -26,12 +72,13 @@ const prompts = {
     const selectedDomainPrompt = prompts[values.domain];
   
     document.getElementById('previewPrompt').innerHTML = generatedPrompt + `\n\nPrompt Spécifique au Domaine :\n${selectedDomainPrompt}`;
-  }
+}
   
-  
-  function capitalize(str) {
+// Get the right name
+function capitalize(str) {
     console.log(document.getElementById(str).getAttribute("l"));
     return document.getElementById(str).getAttribute("l");
     //return str.charAt(0).toUpperCase() + str.slice(1);
-  }
+}
+
   

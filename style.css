@@ -1,7 +1,14 @@
+html{
+  height: 100%;
+}
+
 body{
     background-image: url("./img/BG.png");
     background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom right;
     font-family: 'Archivo', sans-serif;
+    min-height: 100%;
 }
 
 #thiga_logo{
@@ -30,6 +37,11 @@ ul li{
     color: white;
     list-style: none;
     border-radius: 5px;
+
+    -webkit-transition: background-color 300ms linear;
+    -ms-transition: background-color 300ms linear;
+    transition: background-color 300ms linear;
+
 }
 
 li::marker{
@@ -41,8 +53,16 @@ li:hover:not(:first-child){
     cursor: pointer;
 }
 
-li:hover img.d-none{
-    display: inline !important;
+li img.enter-icon {
+    opacity: 0;
+
+    -webkit-transition: opacity 300ms linear;
+    -ms-transition: opacity 300ms linear;
+    transition: opacity 300ms linear;
+}
+
+li:hover img.enter-icon{
+    opacity: 1;
 }
 
 li:not(:first-child) img{
@@ -58,6 +78,11 @@ li:not(:first-child) img{
     text-align: left;
 }
 
+a, a:visited, a:hover, a:active, a:link{
+    color: #ADB3B7;
+    font-size: 14px;
+    text-decoration: none;
+}
 
 /* ############################ */
 /* ########### FORM ########### */
@@ -97,4 +122,33 @@ label{
 
 .form-step{
     margin: 2rem;
+}
+
+
+/* ############################ */
+/* ####### PROGRESS BAR ####### */
+/* ############################ */
+
+.progress-stacked{
+    border-radius: 50%;
+    --bs-progress-height: .3rem !important;
+    padding: 0 !important;
+}
+
+.progress{
+    --bs-progress-height: .5rem !important;
+}
+
+.progress-bar{
+    border-radius: 50px;
+    --bs-progress-bar-bg: #fff;
+
+    -webkit-transition: --bs-progress-bar-bg 300ms linear;
+    -ms-transition: --bs-progress-bar-bg 300ms linear;
+    transition: --bs-progress-bar-bg 300ms linear;
+
+}
+
+.progress-checked{
+    --bs-progress-bar-bg: #38D2A3;
 }

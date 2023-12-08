@@ -10,6 +10,8 @@
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css">
+
     <title>THIGA AI - Prompt Generator</title>
 </head>
 <body>
@@ -20,15 +22,12 @@
 
                 <!-- STEP 1 -->
                 <div class="row form-step">
-                    <div class="col-1 p-0 text-center"><img src="./img/icon-bot.png" alt=""></div>
-                    <input id="proto-step-1" class="col-11 inputField" type="text" placeholder="Le type de produit" l="Le type de produit">
-                </div>
+                    <div class="col-12 p-0 text-start mb-3 text-light fw-semibold fs-6">🤖 <span id="steps-label">Le type de produit</span></div>
+                    <input id="proto-step-1" class="col-12 inputField" type="text" placeholder="Le type de produit" l="Le type de produit" autofocus>
 
                 <!-- STEP 2 -->
-                <div class="row form-step">
-                    <div class="col-1 p-0 text-center"><img src="./img/icon-bot.png" alt=""></div>
-
-                    <select class="col-11 inputField" id="domain" name="domain" l="Le domaine">
+                    <select class="col-12 inputField d-none" id="domain" name="domain" l="Le domaine" onchange="nextStep()">
+                        <option value="">Le domaine</option>
                         <option value="confidentialityPreferences">Préférences de Confidentialité</option>
                         <option value="platformPerformanceTracking">Suivi des Performances de la Plateforme</option>
                         <option value="productReturnsManagement">Gestion des Retours Produits</option>
@@ -46,72 +45,100 @@
                         <option value="healthAndWellnessPreferences">Préférences de Santé et Bien-être</option>
                         <option value="travelReservationsManagement">Gestion des Réservations de Voyages</option>
                     </select>
-                </div>
 
                 <!-- STEP 3 -->
-                <div class="row form-step">
-                    <div class="col-1 text-center">Le device :</div>
-                    <div class="col-10">
-                        <div class="form-check form-check-inline inlineRadio">
-                            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="web app" class="inputField" l="Le device">
-                            <label for="inlineRadio1">🖥️ Web app</label>
-                        </div>
-                        <div class="form-check form-check-inline inlineRadio">
-                            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="mobile app" class="inputField" l="Le device">
-                            <label for="inlineRadio2">📱 Mobile app</label>
-                        </div>
-                    </div>
-                </div>
+                    <select class="col-12 inputField d-none" id="device" name="device" l="Le device" onchange="nextStep()">
+                        <option value="web">🖥️ Web app</option>
+                        <option value="mobile">📱 Mobile app</option>
+                    </select>
 
                 <!-- STEP 4 -->
-                <div class="row form-step">
-                    <label class="col-1" for="language">Langue:</label>
-                    <select class="col-11 inputField" id="language" name="language" l="La langue">
+                    <select class="col-12 inputField d-none" id="language" name="language" l="La langue" onchange="nextStep()">
                         <option value="english">🇬🇧 Anglais</option>
                         <option value="french">🇫🇷 Français</option>
                         <option value="spanish">🇪🇸 Espagnol</option>
                     </select>
-                </div>
 
                 <!-- STEP 5 -->
-                <div class="row form-step">
-                    <label class="col-1" for="codeLanguage">Langage de Code:</label>
-                    <select class="col-11 inputField" id="codeLanguage" name="codeLanguage" l="Le language de programmation">
+                    <select class="col-12 inputField d-none" id="codeLanguage" name="codeLanguage" l="Le language de programmation" onchange="nextStep()">
                         <option value="python">Python</option>
                         <option value="javascript">JavaScript</option>
                         <option value="java">Java</option>
                         <option value="cpp">C++</option>
                     </select>
-                </div>
 
                 <!-- STEP 6 -->
-                <div class="row form-step">
-                    <div class="col-1 text-center"><img src="./img/icon-bot.png" alt=""></div>
-                    <input id="proto-step-6" class="col-11 inputField" type="text" placeholder="Le contexte" l="Le contexte">
-                </div>
+                    <input id="proto-step-6" class="col-12 inputField d-none" type="text" placeholder="Le contexte" l="Le contexte">
 
                 <!-- STEP 7 -->
-                <div class="row form-step">
-                    <div class="col-1 text-center"><img src="./img/icon-bot.png" alt=""></div>
-                    <input id="proto-step-7" class="col-11 inputField" type="text" placeholder="Objectif du prompt" l="L'objectif du prompt">
-                </div>
+                    <input id="proto-step-7" class="col-12 inputField d-none" type="text" placeholder="Objectif du prompt" l="L'objectif du prompt">
 
                 <!-- STEP 8 -->
-                <div class="row form-step">
-                    <div class="col-1 text-center"><img src="./img/icon-bot.png" alt=""></div>
-                    <input id="proto-step-8" class="col-11 inputField" type="text" placeholder="Mots-clés importants" l="Les mots-clés importants">
-                </div>
+                    <input id="proto-step-8" class="col-12 inputField d-none" type="text" placeholder="Mots-clés importants" l="Les mots-clés importants">
 
 
                 <!-- RESULT -->
-                <div class="form-step">
-                    <div class=" text-center"><img src="./img/icon-bot.png" alt=""> Voici ton prompt prêt à être utilisé sur ChatGPT !</div>
-                    <textarea name="" id="previewPrompt" cols="30" rows="10" class="col-11"></textarea>
+                    <textarea name="" id="previewPrompt" class="inputField d-none" cols="30" rows="10" class="col-12" l="Voici ton prompt prêt à être utilisé sur ChatGPT !"></textarea>
+
+    <!--<button type="button" onclick="generatePrompt()">Générer Prompt</button>-->
+            <div class="row text-center mt-5 justify-content-center">
+
+                <div class="progress-stacked mx-1 col-1">
+                    <div class="progress" role="progressbar" aria-label="" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                        <div class="progress-bar progress-checked"></div>
+                    </div>
                 </div>
 
-    <button type="button" onclick="generatePrompt()">Générer Prompt</button>
+                <div class="progress-stacked mx-1 col-1">
+                    <div class="progress" role="progressbar" aria-label="" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                        <div class="progress-bar"></div>
+                    </div>
+                </div>
 
-                <a href="index.html">Retour à l'accueil</a>
+                <div class="progress-stacked mx-1 col-1">
+                    <div class="progress" role="progressbar" aria-label="" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                        <div class="progress-bar"></div>
+                    </div>
+                </div>
+
+                <div class="progress-stacked mx-1 col-1">
+                    <div class="progress" role="progressbar" aria-label="" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                        <div class="progress-bar"></div>
+                    </div>
+                </div>
+
+                <div class="progress-stacked mx-1 col-1">
+                    <div class="progress" role="progressbar" aria-label="" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                        <div class="progress-bar"></div>
+                    </div>
+                </div>
+
+                <div class="progress-stacked mx-1 col-1">
+                    <div class="progress" role="progressbar" aria-label="" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                        <div class="progress-bar"></div>
+                    </div>
+                </div>
+
+                <div class="progress-stacked mx-1 col-1">
+                    <div class="progress" role="progressbar" aria-label="" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                        <div class="progress-bar"></div>
+                    </div>
+                </div>
+
+                <div class="progress-stacked mx-1 col-1">
+                    <div class="progress" role="progressbar" aria-label="" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                        <div class="progress-bar"></div>
+                    </div>
+                </div>
+
+                <div class="progress-stacked mx-1 col-1">
+                    <div class="progress" role="progressbar" aria-label="" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                        <div class="progress-bar"></div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="index.html" class="mt-5">Retour à l'accueil</a>
         </div>
 
     </div>
