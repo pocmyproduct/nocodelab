@@ -18,130 +18,136 @@
     <div class="container">
         <div class="text-center">
             <img src="./img/logo.png" alt="Logo THIGA AI" id="thiga_logo" class="mt-5 mb-5" />
-            <h1 class="text-uppercase text-light mb-5">Prompt Generator</h1>
+            <h1 class="text-uppercase text-light mb-5">Prototype Generator</h1>
 
-                <!-- STEP 1 -->
-                <div class="row form-step">
-                    <div class="col-12 p-0 text-start mb-3 text-light fw-semibold fs-6">🤖 <span id="steps-label">Le type de produit</span></div>
-                    <input id="proto-step-1" class="col-12 inputField" type="text" placeholder="Le type de produit" l="Le type de produit" autofocus>
+            <!-- STEP 1 -->
+            <div class="row form-step">
+                <div class="col-12 p-0 text-start mb-3 text-light fw-semibold fs-6">🤖 <span id="steps-label">Le type de produit</span></div>
+
+                <span class="enter-icon-form"></span>
+
+                <input id="proto-step-1" class="col-12 inputField" type="text" placeholder="Le type de produit" l="Product type" autofocus>
 
                 <!-- STEP 2 -->
-                    <select class="col-12 inputField d-none" id="domain" name="domain" l="Le domaine" onchange="nextStep()">
-                        <option value="">Le domaine</option>
-                        <option value="confidentialityPreferences">Préférences de Confidentialité</option>
-                        <option value="platformPerformanceTracking">Suivi des Performances de la Plateforme</option>
-                        <option value="productReturnsManagement">Gestion des Retours Produits</option>
-                        <option value="socialSharingPreferences">Préférences de Partage Social</option>
-                        <option value="supportRequestsTracking">Suivi des Demandes de Support</option>
-                        <option value="languagePreferences">Préférences de Langue</option>
-                        <option value="newsletterSubscriptionsManagement">Gestion des Abonnements aux Newsletters</option>
-                        <option value="interfaceCustomizationPreferences">Préférences de Personnalisation de l'Interface</option>
-                        <option value="blogPostsAndInteractionsTracking">Suivi des Publications et des Interactions sur le Blog</option>
-                        <option value="pushNotificationPreferences">Préférences de Notification Push</option>
-                        <option value="savingsGoalsTracking">Suivi des Objectifs d'Économies</option>
-                        <option value="streamingPreferencesManagement">Gestion des Préférences de Streaming</option>
-                        <option value="securityAlertsConfiguration">Configuration des Alertes de Sécurité</option>
-                        <option value="marketTrendsTracking">Suivi des Tendances du Marché</option>
-                        <option value="healthAndWellnessPreferences">Préférences de Santé et Bien-être</option>
-                        <option value="travelReservationsManagement">Gestion des Réservations de Voyages</option>
-                    </select>
+                <select class="col-12 inputField d-none" id="domain" name="domain" l="Theme" onchange="nextStep()">
+                    <option disabled selected value> -- selectionnez un domaine -- </option>
+                    <option value="confidentialityPreferences">🤫 Préférences de Confidentialité</option>
+                    <option value="platformPerformanceTracking">📊 Suivi des Performances de la Plateforme</option>
+                    <option value="productReturnsManagement">📦 Gestion des Retours Produits</option>
+                    <option value="socialSharingPreferences">🌅 Préférences de Partage Social</option>
+                    <option value="supportRequestsTracking">📞 Suivi des Demandes de Support</option>
+                    <option value="languagePreferences">💱 Préférences de Langue</option>
+                    <option value="newsletterSubscriptionsManagement">💌 Gestion des Abonnements aux Newsletters</option>
+                    <option value="interfaceCustomizationPreferences">🖱️ Préférences de Personnalisation de l'Interface</option>
+                    <option value="blogPostsAndInteractionsTracking">💬 Suivi des Publications et des Interactions sur le Blog</option>
+                    <option value="pushNotificationPreferences">🔴 Préférences de Notification Push</option>
+                    <option value="savingsGoalsTracking">💰 Suivi des objectifs de budget</option>
+                    <option value="streamingPreferencesManagement">📺 Gestion des Préférences de Streaming</option>
+                    <option value="securityAlertsConfiguration">🚨 Configuration des Alertes de Sécurité</option>
+                    <option value="marketTrendsTracking">📰 Suivi des Tendances du Marché</option>
+                    <option value="healthAndWellnessPreferences">🩺 Préférences de Santé et Bien-être</option>
+                    <option value="travelReservationsManagement">🛄 Gestion des Réservations de Voyages</option>
+                </select>
 
                 <!-- STEP 3 -->
-                    <select class="col-12 inputField d-none" id="device" name="device" l="Le device" onchange="nextStep()">
-                        <option value="web">🖥️ Web app</option>
-                        <option value="mobile">📱 Mobile app</option>
-                    </select>
+                <select class="col-12 inputField d-none" id="device" name="device" l="Device" onchange="nextStep()">
+                    <option disabled selected value> -- selectionnez un device -- </option>
+                    <option value="web">🖥️ Web app</option>
+                    <option value="mobile">📱 Mobile app</option>
+                </select>
 
                 <!-- STEP 4 -->
-                    <select class="col-12 inputField d-none" id="language" name="language" l="La langue" onchange="nextStep()">
-                        <option value="english">🇬🇧 Anglais</option>
-                        <option value="french">🇫🇷 Français</option>
-                        <option value="spanish">🇪🇸 Espagnol</option>
-                    </select>
+                <select class="col-12 inputField d-none" id="language" name="language" l="Language" onchange="nextStep()">
+                    <option disabled selected value> -- selectionnez une langue -- </option>
+                    <option value="english">🇬🇧 Anglais</option>
+                    <option value="french">🇫🇷 Français</option>
+                    <option value="spanish">🇪🇸 Espagnol</option>
+                </select>
 
                 <!-- STEP 5 -->
-                    <select class="col-12 inputField d-none" id="codeLanguage" name="codeLanguage" l="Le language de programmation" onchange="nextStep()">
-                        <option value="python">Python</option>
-                        <option value="javascript">JavaScript</option>
-                        <option value="java">Java</option>
-                        <option value="cpp">C++</option>
-                    </select>
+                <select class="col-12 inputField d-none" id="codeLanguage" name="codeLanguage" l="Programming language" onchange="nextStep()">
+                    <option disabled selected value> -- selectionnez un language de programmation -- </option>
+                    <option value="python">Python</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="java">Java</option>
+                    <option value="cpp">C++</option>
+                </select>
 
                 <!-- STEP 6 -->
-                    <input id="proto-step-6" class="col-12 inputField d-none" type="text" placeholder="Le contexte" l="Le contexte">
+                <input id="proto-step-6" class="col-12 inputField d-none" type="text" placeholder="Le contexte" l="Context">
 
                 <!-- STEP 7 -->
-                    <input id="proto-step-7" class="col-12 inputField d-none" type="text" placeholder="Objectif du prompt" l="L'objectif du prompt">
+                <input id="proto-step-7" class="col-12 inputField d-none" type="text" placeholder="Objectif du prompt" l="Prompt goal">
 
                 <!-- STEP 8 -->
-                    <input id="proto-step-8" class="col-12 inputField d-none" type="text" placeholder="Mots-clés importants" l="Les mots-clés importants">
-
+                <input id="proto-step-8" class="col-12 inputField d-none" type="text" placeholder="Mots-clés importants" l="Important keywords">
 
                 <!-- RESULT -->
-                    <textarea name="" id="previewPrompt" class="inputField d-none" cols="30" rows="10" class="col-12" l="Voici ton prompt prêt à être utilisé sur ChatGPT !"></textarea>
+                <textarea readonly name="" id="previewPrompt" class="inputField d-none" cols="30" rows="15" class="col-12" l="Voici ton prompt prêt à être utilisé sur ChatGPT !"></textarea>
 
-    <!--<button type="button" onclick="generatePrompt()">Générer Prompt</button>-->
-            <div class="row text-center mt-5 justify-content-center">
+                <button class="copyPrompt mt-3 d-none">Copy</button>
 
-                <div class="progress-stacked mx-1 col-1">
-                    <div class="progress" role="progressbar" aria-label="" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                        <div class="progress-bar progress-checked"></div>
-                    </div>
-                </div>
+                <a href="https://chat.openai.com/" target="_blank" class="AITool mx-3 mt-3 d-none">ChatGPT</a>
 
-                <div class="progress-stacked mx-1 col-1">
-                    <div class="progress" role="progressbar" aria-label="" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                        <div class="progress-bar"></div>
-                    </div>
-                </div>
-
-                <div class="progress-stacked mx-1 col-1">
-                    <div class="progress" role="progressbar" aria-label="" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                        <div class="progress-bar"></div>
-                    </div>
-                </div>
-
-                <div class="progress-stacked mx-1 col-1">
-                    <div class="progress" role="progressbar" aria-label="" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                        <div class="progress-bar"></div>
-                    </div>
-                </div>
-
-                <div class="progress-stacked mx-1 col-1">
-                    <div class="progress" role="progressbar" aria-label="" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                        <div class="progress-bar"></div>
-                    </div>
-                </div>
-
-                <div class="progress-stacked mx-1 col-1">
-                    <div class="progress" role="progressbar" aria-label="" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                        <div class="progress-bar"></div>
-                    </div>
-                </div>
-
-                <div class="progress-stacked mx-1 col-1">
-                    <div class="progress" role="progressbar" aria-label="" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                        <div class="progress-bar"></div>
-                    </div>
-                </div>
-
-                <div class="progress-stacked mx-1 col-1">
-                    <div class="progress" role="progressbar" aria-label="" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                        <div class="progress-bar"></div>
-                    </div>
-                </div>
-
-                <div class="progress-stacked mx-1 col-1">
-                    <div class="progress" role="progressbar" aria-label="" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                        <div class="progress-bar"></div>
-                    </div>
-                </div>
+                <a href="index.html" class="mt-5">Retour à l'accueil</a>
+                <!--<button type="button" onclick="generatePrompt()">Générer Prompt</button>-->
             </div>
 
-            <a href="index.html" class="mt-5">Retour à l'accueil</a>
         </div>
 
     </div>
+
+    <div class="row text-center mb-4 justify-content-center fixed-bottom">
+
+        <div class="progress-stacked mx-1 col-1" step="0">
+            <div class="progress" role="progressbar" aria-label="" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                <div class="progress-bar progress-checked"></div>
+            </div>
+        </div>
+
+        <div class="progress-stacked mx-1 col-1" step="1">
+            <div class="progress" role="progressbar" aria-label="" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+
+        <div class="progress-stacked mx-1 col-1" step="2">
+            <div class="progress" role="progressbar" aria-label="" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+
+        <div class="progress-stacked mx-1 col-1" step="3">
+            <div class="progress" role="progressbar" aria-label="" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+
+        <div class="progress-stacked mx-1 col-1" step="4">
+            <div class="progress" role="progressbar" aria-label="" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+
+        <div class="progress-stacked mx-1 col-1" step="5">
+            <div class="progress" role="progressbar" aria-label="" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+
+        <div class="progress-stacked mx-1 col-1" step="6">
+            <div class="progress" role="progressbar" aria-label="" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+
+        <div class="progress-stacked mx-1 col-1" step="7">
+            <div class="progress" role="progressbar" aria-label="" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="./proto.js"></script>
 </body>

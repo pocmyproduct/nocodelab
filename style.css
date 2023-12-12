@@ -1,3 +1,7 @@
+/* ############################ */
+/* ########### MAIN ########### */
+/* ############################ */
+
 html{
   height: 100%;
 }
@@ -53,6 +57,10 @@ li:hover:not(:first-child){
     cursor: pointer;
 }
 
+.focus-select {
+    background-color: rgb(255 255 255 / 0.2);
+}
+
 li img.enter-icon {
     opacity: 0;
 
@@ -78,10 +86,17 @@ li:not(:first-child) img{
     text-align: left;
 }
 
-a, a:visited, a:hover, a:active, a:link{
+a, a:visited, a:active, a:link{
     color: #ADB3B7;
     font-size: 14px;
     text-decoration: none;
+
+    -webkit-transition: color 300ms linear;
+    -ms-transition: color 300ms linear;
+    transition: color 300ms linear;
+}
+a:hover{
+    color: #38D2A3;
 }
 
 /* ############################ */
@@ -122,8 +137,60 @@ label{
 
 .form-step{
     margin: 2rem;
+    position: relative;
 }
 
+
+.enter-icon-form{
+    cursor: pointer;
+    background: url("./img/icon-enter.png") no-repeat;
+    height: 24px !important;
+    width: 24px !important;
+    position: absolute;
+    right: 1.2rem;
+    top: 3.6rem;
+}
+
+#previewPrompt{
+    resize: none;
+}
+
+.copyPrompt, .AITool{
+    background-color: transparent;
+    border: thin solid white;
+    border-radius: 5px;
+    color: #FFF;
+    padding: .5rem 1rem;
+    width: initial !important;
+
+    -webkit-transition: border 300ms linear, background-color 300ms linear;
+    -ms-transition: border 300ms linear, background-color 300ms linear;
+    transition: border 300ms linear, background-color 300ms linear;
+}
+
+.copyPrompt:hover, .AITool:hover{
+    border: thin solid #38D2A3;
+    background-color: #38D2A3;
+    color: #fff;
+}
+
+.copyPrompt::before, .AITool::before {
+    margin-right: .5rem;
+    vertical-align: sub;                            /* <--- Pas idéal */
+}
+
+.copyPrompt::before{
+    content:url('./img/copy.svg');
+}
+
+.AITool:visited{
+    color: #FFF;
+}
+
+
+.AITool::before{
+    content:url('./img/icon-goto.svg');
+}
 
 /* ############################ */
 /* ####### PROGRESS BAR ####### */
@@ -133,6 +200,7 @@ label{
     border-radius: 50%;
     --bs-progress-height: .3rem !important;
     padding: 0 !important;
+    cursor: pointer;
 }
 
 .progress{
