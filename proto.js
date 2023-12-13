@@ -37,14 +37,21 @@ function nextStep(){
     $('.inputField').addClass("d-none");
     steps++;
 
-    // Change the label between each steps
-    var label = $('.inputField')[steps].getAttribute('l');
-    $('#steps-label').text(label);
-
     // => if it's not the last input with the class "inputField"
     if(steps < $('.inputField').length-1){
+
+        // Don't show the field context if domain/theme != other
+        if($('.inputField')[steps].id == "proto-step-6" && $('.inputField')[1].value != "other") {
+            steps++;
+        }
+
+        // Change the label between each steps
+        var label = $('.inputField')[steps].getAttribute('l');
+        $('#steps-label').text(label);
+
         // display the next step
         $('.inputField')[steps].classList.remove('d-none');
+        $('.inputField')[steps].focus();
         progressbargreen();
     } else {
         // display the perfect prompt
@@ -52,7 +59,7 @@ function nextStep(){
         $('.copyPrompt').removeClass('d-none');
         $('.AITool').removeClass('d-none');
         generatePrompt();
-        $('.progress-stacked').addClass('d-none');
+
         $('.enter-icon-form').addClass('d-none');
     }
 }
@@ -75,6 +82,8 @@ $('.progress-stacked').on('click', function(){
     
     steps =this.getAttribute('step');
 
+    $('.copyPrompt').addClass('d-none');
+    $('.AITool').addClass('d-none');
 
     // Change the label between each steps
     var label = $('.inputField')[steps].getAttribute('l');
@@ -82,6 +91,8 @@ $('.progress-stacked').on('click', function(){
 
     // display the next step
     $('.inputField')[steps].classList.remove('d-none');
+    $('.inputField')[steps].focus();
+
     progressbargreen();
 })
 
@@ -96,14 +107,14 @@ function generatePrompt() {
     });
 
     delete values['previewPrompt'];
-
-    console.log(values['previewPrompt']);
   
     const generatedPrompt = Object.keys(values).map(key => `${capitalize(key)} : ${values[key]} `).join('\n');
     const selectedDomainPrompt = prompts[values.domain];
-  
+
+    const context = "You are an experienced web and mobile developer and you have to create a functional prototype for user testing."
+
     //document.getElementById('previewPrompt').innerHTML = generatedPrompt + `\n\nPrompt Spécifique au Domaine :\n${selectedDomainPrompt}`;
-    textTypingEffect(document.getElementById('previewPrompt'), generatedPrompt + `\n\n ${selectedDomainPrompt}, create the HTML, CSS and Javascript code.`);
+    textTypingEffect(document.getElementById('previewPrompt'), generatedPrompt + `\n${context}` + `\n\n${selectedDomainPrompt} \n\n Write the HTML, CSS and Javascript code.`);
 }
   
 // Get the right name
@@ -163,4 +174,4 @@ setInterval(() => {
     }
     $('#proto-step-1').attr('placeholder', placeholderHints[i])
     i++;
-}, 2000);
+}, 1500);
