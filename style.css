@@ -162,6 +162,7 @@ label{
     color: #FFF;
     padding: .5rem 1rem;
     width: initial !important;
+    cursor:pointer;
 
     -webkit-transition: border 300ms linear, background-color 300ms linear;
     -ms-transition: border 300ms linear, background-color 300ms linear;
